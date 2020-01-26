@@ -1,0 +1,12 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "CD_DEFINITIONS.h"
+
+CD_DEFINITIONS::CD_DEFINITIONS()
+{
+}
+
+CD_DEFINITIONS::~CD_DEFINITIONS()
+{
+}

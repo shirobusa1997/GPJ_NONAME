@@ -4,13 +4,12 @@
 
 #include "CoreMinimal.h"
 
-
 /**
  * 
  */
-class GPJ_NONAME_API CPP_DEFINITION
+class GPJ_NONAME_API CD_DEFINITIONS
 {
 public:
-	CPP_DEFINITION();
-	~CPP_DEFINITION();
+	CD_DEFINITIONS();
+	~CD_DEFINITIONS();
 };
