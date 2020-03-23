@@ -8,9 +8,14 @@ public class GPJ_NONAME : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Json", "imgui" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Json"});
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "imgui" });
+		// Use ImGui modules only in developping.
+		if (Target.Configuration != UnrealTargetConfiguration.Shipping)
+		{
+			PublicDependencyModuleNames.AddRange(new string[] { "ImGui" });
+			PrivateDependencyModuleNames.AddRange(new string[] { "ImGui" });
+		}
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
