@@ -20,9 +20,13 @@
 #include <imgui.h>
 #include <ImGuiDelegates.h>
 #include <ImGuiModule.h>
+#include <ImGuiInputHandler.h>
+#include <ImGuiModuleProperties.h>
 #endif
 
 #include "DEBUG_CD_HUD.generated.h"
+
+DECLARE_LOG_CATEGORY_EXTERN(DEBUGSysLog, Log, All);
 
 /**
  * 
@@ -38,5 +42,36 @@ class GPJ_NONAME_API ADEBUG_CD_HUD : public AHUD
 		virtual void BeginPlay() override;
 		virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 		virtual void Tick(float DeltaTime) override;
-	
+		
+		UFUNCTION(BlueprintCallable)
+		void ToggleDebugHUD();
+		void MoveForward(float AxisValue);
+		void MoveRight(float AxisValue);
+		void PitchCamera(float AxisValue);
+		void YawCamera(float AxisValue);
+
+		bool DebugHudState = false;
+
+		// DebugCommand Declaration Settings
+
+
+		APlayerController*  PlayerController;
+		UInputComponent* 	PlayerInputComponent;
+
+		#if WITH_IMGUI
+			void ImGuiTick();
+			void ShowApplicationInfoHUD();
+			static void ImGuiMultiContextTick();
+
+			FImGuiDelegateHandle ImGuiTickHandle;
+			FImGuiDelegateHandle ImGuiMultiContextTickHandle;
+		#endif // WITH_IMGUI
+
+	private:
+		float currentMoveForwardAxis;
+		float currentMoveRightAxis;
+		float currentLookUpAxis;
+		float currentTurnAxis;
+
+		void InitializeParam();
 };
