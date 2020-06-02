@@ -28,7 +28,7 @@ ADEBUG_CD_HUD::ADEBUG_CD_HUD() {
 }
 
 void ADEBUG_CD_HUD::InitializeParam() {
-	DebugHudState = false;
+	DebugHudState = true;
 	PlayerController = UGameplayStatics::GetPlayerController(this, 0);
 
 #if !(UE_BUILD_SHIPPING || UE_BUILD_TEST)
