@@ -114,7 +114,7 @@ void ADEBUG_CD_HUD::ToggleDebugHUD() {
         ImGui::SetNextWindowBgAlpha(0.3);
         ImGui::SetNextWindowPos(ImVec2(0, 0));
         ImGui::Begin("hoge", &show_app_about, window_flags);
-        ImGui::Text("hoge");
+        ImGui::Text("[DEVELOPMENT BUILD] Project ");
         ImGui::End();
     } 
 #endif
