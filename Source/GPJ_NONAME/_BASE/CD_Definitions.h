@@ -3,27 +3,27 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Serialization/JsonSerializerMacros.h"
 #include "CD_Definitions.generated.h"
 
 UENUM(BlueprintType)
 enum class EAppChannel : uint8
 {
-	EAC_Development	UMETA(DisplayName = "Dev"),
-	EAC_Test		UMETA(DisplayName = "Test"),
-	EAC_Release		UMETA(DisplayName = "Release")
-}
+	EAC_Development	UMETA(DisplayName = "DEV"),
+	EAC_Test		UMETA(DisplayName = "TST"),
+	EAC_Release		UMETA(DisplayName = "RLS")
+};
 
 USTRUCT(BlueprintType)
 struct GPJ_NONAME_API FAppInternalInfo
 {
 	GENERATED_USTRUCT_BODY()
-
 	public:
-		UPROPERTY(BlueprintReadOnly) EAppChannel AppChannel;
-		UPROPERTY(BlueprintReadOnly) FString 	 ProjectName;
-		UPROPERTY(BlueprintReadOnly) FString 	 AppVersion;
-		UPROPRETY(BlueprintReadOnly) FString 	 AppBuildDate;
-}
+		UPROPERTY(BlueprintReadWrite) EAppChannel AppChannel;
+		UPROPERTY(BlueprintReadWrite) FString 	  ProjectName;
+		UPROPERTY(BlueprintReadWrite) FString 	  AppVersion;
+		UPROPERTY(BlueprintReadWrite) FString 	  AppBuildDate;
+};
 
 class GPJ_NONAME_API CD_Definitions
 {

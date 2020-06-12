@@ -108,13 +108,15 @@ void ADEBUG_CD_HUD::ToggleDebugHUD() {
 
         ImGuiWindowFlags window_flags = 0;
         window_flags |= ImGuiWindowFlags_NoTitleBar;
+        window_flags |= ImGuiWindowFlags_AlwaysAutoResize;
         window_flags |= ImGuiWindowFlags_NoResize;
         window_flags |= ImGuiWindowFlags_NoNav;
 
         ImGui::SetNextWindowBgAlpha(0.3);
         ImGui::SetNextWindowPos(ImVec2(0, 0));
         ImGui::Begin("hoge", &show_app_about, window_flags);
-        ImGui::Text("[DEVELOPMENT BUILD] Project ");
+        ImGui::Text("[DEVELOPMENT BUILD] Project CYBER BEAST HISTORIA");
+        ImGui::Text("CBH:DEV:0.0.1:J:WIN:20200631");
         ImGui::End();
     } 
 #endif

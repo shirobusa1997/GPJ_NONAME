@@ -73,5 +73,7 @@ class GPJ_NONAME_API ADEBUG_CD_HUD : public AHUD
 		float currentLookUpAxis;
 		float currentTurnAxis;
 
+		FString VersionInfo;
+
 		void InitializeParam();
 };
