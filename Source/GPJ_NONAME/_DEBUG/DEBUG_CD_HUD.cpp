@@ -28,11 +28,15 @@ ADEBUG_CD_HUD::ADEBUG_CD_HUD() {
 }
 
 void ADEBUG_CD_HUD::InitializeParam() {
-	DebugHudState = true;
 	PlayerController = UGameplayStatics::GetPlayerController(this, 0);
+    PlayerPawn       = PlayerController->GetPawn();
 
 #if !(UE_BUILD_SHIPPING || UE_BUILD_TEST)
 	ShowApplicationInfoHUD();
+    if(PlayerPawn != nullptr)
+    {
+        ShowPlayerPawnTrackerHUD();
+    }
 #endif
 }
 
@@ -42,6 +46,7 @@ void ADEBUG_CD_HUD::BeginPlay() {
 #if WITH_IMGUI
 	ImGuiTickHandle = FImGuiModule::Get().AddWorldImGuiDelegate(FImGuiDelegate::CreateUObject(this, &ADEBUG_CD_HUD::ImGuiTick));
 	ImGuiMultiContextTickHandle.Reset();
+    InitializeParam();
 #endif	// WITH_IMGUI
 }
 
@@ -97,6 +102,10 @@ void ADEBUG_CD_HUD::ToggleDebugHUD() {
     void ADEBUG_CD_HUD::ImGuiTick() {
         if (DebugHudState) {
             ShowApplicationInfoHUD();
+            if(PlayerPawn != nullptr)
+            {
+                ShowPlayerPawnTrackerHUD();
+            }
         }
     }
     void ADEBUG_CD_HUD::ImGuiMultiContextTick() {
@@ -119,4 +128,28 @@ void ADEBUG_CD_HUD::ToggleDebugHUD() {
         ImGui::Text("CBH:DEV:0.0.1:J:WIN:20200631");
         ImGui::End();
     } 
+
+    void ADEBUG_CD_HUD::ShowPlayerPawnTrackerHUD() {
+        static bool show_app_about = true;
+        FVector   PawnLocation = PlayerPawn->GetActorLocation();
+        FVector   PawnRotation;
+        FVector2D ScreenLocation;
+        FString   ObjectName   = PlayerPawn->GetDebugName();
+
+        PlayerController->ProjectWorldLocationToScreen(WorldLocation, ScreenLocation);
+
+        ImGuiWindowFlags window_flags = 0;
+        window_flags |= ImGuiWindowFlags_NoTitleBar;
+        window_flags |= ImGuiWindowFlags_AlwaysAutoResize;
+        window_flags |= ImGuiWindowFlags_NoResize;
+        window_flags |= ImGuiWindowFlags_NoNav;
+
+        ImGui::SetNextWindowPos(ImVec2(ScreenLocation.X, ScreenLocation.Y));
+        ImGui::Begin("PawnTracker", &show_app_about, window_flags);
+        ImGui::Text(TEXT("PawnName   : %s", ObjectName));
+        ImGui::Text("MasterClass: ");
+        ImGui::Text("Location   : %f, %f, %f", PawnLocation.X, PawnLocation.Y, PawnLocation.Z);
+        ImGui::Text("Rotation   : %f, %f, %f", PawnRotation.Z);
+        ImGui::End();
+    }
 #endif

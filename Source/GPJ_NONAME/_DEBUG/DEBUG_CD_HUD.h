@@ -6,6 +6,7 @@
 #include "GameFramework/HUD.h"
 
 #include "Kismet/GameplayStatics.h"
+#include "GameFramework/Pawn.h"
 #include "Components/InputComponent.h"
 
 #ifdef IMGUI_API
@@ -50,17 +51,19 @@ class GPJ_NONAME_API ADEBUG_CD_HUD : public AHUD
 		void PitchCamera(float AxisValue);
 		void YawCamera(float AxisValue);
 
-		bool DebugHudState = false;
+		bool DebugHudState = true;
 
 		// DebugCommand Declaration Settings
 
 
 		APlayerController*  PlayerController;
+		APawn*				PlayerPawn;
 		UInputComponent* 	PlayerInputComponent;
 
 		#if WITH_IMGUI
 			void ImGuiTick();
 			void ShowApplicationInfoHUD();
+			void ShowPlayerPawnTrackerHUD();
 			static void ImGuiMultiContextTick();
 
 			FImGuiDelegateHandle ImGuiTickHandle;
