@@ -134,19 +134,17 @@ void ADEBUG_CD_HUD::ToggleDebugHUD() {
         FVector   PawnLocation = PlayerPawn->GetActorLocation();
         FVector   PawnRotation;
         FVector2D ScreenLocation;
-        FString   ObjectName   = PlayerPawn->GetDebugName();
+        FString   ObjectName   = TEXT("DEBUG_DISPLAY_NAME");
 
-        PlayerController->ProjectWorldLocationToScreen(WorldLocation, ScreenLocation);
+        PlayerController->ProjectWorldLocationToScreen(PawnLocation, ScreenLocation);
 
         ImGuiWindowFlags window_flags = 0;
-        window_flags |= ImGuiWindowFlags_NoTitleBar;
         window_flags |= ImGuiWindowFlags_AlwaysAutoResize;
         window_flags |= ImGuiWindowFlags_NoResize;
         window_flags |= ImGuiWindowFlags_NoNav;
 
         ImGui::SetNextWindowPos(ImVec2(ScreenLocation.X, ScreenLocation.Y));
         ImGui::Begin("PawnTracker", &show_app_about, window_flags);
-        ImGui::Text(TEXT("PawnName   : %s", ObjectName));
         ImGui::Text("MasterClass: ");
         ImGui::Text("Location   : %f, %f, %f", PawnLocation.X, PawnLocation.Y, PawnLocation.Z);
         ImGui::Text("Rotation   : %f, %f, %f", PawnRotation.Z);

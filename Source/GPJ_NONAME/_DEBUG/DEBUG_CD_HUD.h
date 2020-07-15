@@ -54,8 +54,6 @@ class GPJ_NONAME_API ADEBUG_CD_HUD : public AHUD
 		bool DebugHudState = true;
 
 		// DebugCommand Declaration Settings
-
-
 		APlayerController*  PlayerController;
 		APawn*				PlayerPawn;
 		UInputComponent* 	PlayerInputComponent;
